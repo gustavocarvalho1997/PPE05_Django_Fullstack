@@ -1,5 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.messages import constants
+from pacientes.models import Paciente
 
 # Create your views here.
 def pacientes(request):
-    return render(request, 'pacientes.html')
+    if request.method == 'GET':
+        queixas = Paciente.queixa_choices
+        return render(request, 'pacientes.html', {'queixas': queixas})
+    elif request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
+        queixa = request.POST.get('queixa')
+        foto = request.FILES.get('foto')
+
+        if len(nome.strip()) == 0 or not foto:
+            messages.add_message(request, constants.ERROR, 'Nome e foto são obrigatórios.')
+            return redirect('pacientes')
+        
+        paciente = Paciente(nome=nome, email=email, telefone=telefone, queixa=queixa, foto=foto)
+        paciente.save()
+        messages.add_message(request, constants.SUCCESS, 'Paciente cadastrado com sucesso.')
+        return redirect('pacientes')
+    
