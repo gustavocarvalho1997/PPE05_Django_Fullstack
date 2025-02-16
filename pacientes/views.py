@@ -25,3 +25,7 @@ def pacientes(request):
         messages.add_message(request, constants.SUCCESS, 'Paciente cadastrado com sucesso.')
         return redirect('pacientes')
     
+def paciente_view(request, id):
+    paciente = Paciente.objects.get(id=id)
+    if request.method == 'GET':
+        return render(request, 'paciente.html', {'paciente': paciente})
