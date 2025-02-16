@@ -91,7 +91,7 @@
                             <li class="relative flex items-center space-x-4 py-4">
                             <div class="min-w-0 flex-auto">
                                 <div class="flex items-center gap-x-3">
-                                <div class="flex-none rounded-full p-1 bg-green-400/10  text-green-400">
+                                <div class="flex-none rounded-full p-1 {% if consulta.humor >= 3 %} bg-green-400/10  text-green-400 {% else %} bg-red-400/10 text-red-400 {% endif %}">
                                     <div class="size-2 rounded-full bg-current"></div>
                                 </div>
                                 <h2 class="min-w-0 text-sm/6 font-semibold text-slate-800">
