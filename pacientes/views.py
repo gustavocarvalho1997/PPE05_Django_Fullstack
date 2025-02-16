@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404 
 from django.contrib import messages
 from django.contrib.messages import constants
-from pacientes.models import Paciente, Tarefa, Consulta
+from pacientes.models import Paciente, Tarefa, Consulta, Visualizacoes
 
 # Create your views here.
 def pacientes(request):
@@ -72,4 +72,9 @@ def consulta_publica(request, id):
     consulta = Consulta.objects.get(id=id)
     if not consulta.paciente.pagamento_em_dia:
         raise Http404()
+    view = Visualizacoes(
+        consulta=consulta,
+        ip=request.META['REMOTE_ADDR']
+    )
+    view.save()
     return render(request, 'consulta_publica.html', {'consulta': consulta})
