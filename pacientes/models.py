@@ -36,3 +36,14 @@ class Tarefa(models.Model):
 
     def __str__(self):
         return self.tarefa
+    
+class Consulta(models.Model):
+    humor = models.PositiveIntegerField()
+    registro_geral = models.TextField()
+    video = models.FileField(upload_to='videos')
+    tarefas = models.ManyToManyField(Tarefa)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    data = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.paciente.nome
