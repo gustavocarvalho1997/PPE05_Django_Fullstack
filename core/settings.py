@@ -131,9 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from django.contrib.messages import constants
 
 MESSAGE_TAGS = {
-    constants.DEBUG: 'bg-gray-500 text-gray-700',
-    constants.INFO: 'bg-blue-500 text-blue-700',
-    constants.SUCCESS: 'bg-green-500 text-green-700',
-    constants.WARNING: 'bg-yellow-500 text-yellow-700',
-    constants.ERROR: 'bg-red-500 text-red-700',
+    constants.DEBUG: 'bg-gray-200 text-gray-700',
+    constants.INFO: 'bg-blue-200 text-blue-700',
+    constants.SUCCESS: 'bg-green-200 text-green-700',
+    constants.WARNING: 'bg-yellow-200 text-yellow-700',
+    constants.ERROR: 'bg-red-200 text-red-700',
 }
