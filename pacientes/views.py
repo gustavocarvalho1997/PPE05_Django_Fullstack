@@ -60,3 +60,9 @@ def atualizar_paciente(request, id):
     paciente.save()
     
     return redirect(f'/pacientes/{id}/')
+
+def excluir_consulta(request, id):
+    consulta = Consulta.objects.get(id=id)
+    paciente_id = consulta.paciente.id
+    consulta.delete()
+    return redirect(f'/pacientes/{paciente_id}/')
