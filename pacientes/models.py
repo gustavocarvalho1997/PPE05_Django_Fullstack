@@ -20,3 +20,19 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class Tarefas(models.Model):
+    frequencia_choices = (
+        ('D', 'Diário'),
+        ('1S', '1 vez por semana'),
+        ('2S', '2 vezes por semana'),
+        ('3S', '3 vezes por semana'),
+        ('N', 'Ao necessitar')
+    )
+
+    tarefa = models.CharField(max_length=255)
+    instrucoes = models.TextField()
+    frequencia = models.CharField(max_length=2, choices=frequencia_choices, default='D')
+
+    def __str__(self):
+        return self.tarefa
