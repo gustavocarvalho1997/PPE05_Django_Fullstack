@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404 
 from django.contrib import messages
 from django.contrib.messages import constants
 from pacientes.models import Paciente, Tarefa, Consulta
@@ -66,3 +67,9 @@ def excluir_consulta(request, id):
     paciente_id = consulta.paciente.id
     consulta.delete()
     return redirect(f'/pacientes/{paciente_id}/')
+
+def consulta_publica(request, id):
+    consulta = Consulta.objects.get(id=id)
+    if not consulta.paciente.pagamento_em_dia:
+        raise Http404()
+    return render(request, 'consulta_publica.html', {'consulta': consulta})
