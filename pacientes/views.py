@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.messages import constants
-from pacientes.models import Paciente
+from pacientes.models import Paciente, Tarefa
 
 # Create your views here.
 def pacientes(request):
@@ -28,7 +28,8 @@ def pacientes(request):
 def paciente_view(request, id):
     paciente = Paciente.objects.get(id=id)
     if request.method == 'GET':
-        return render(request, 'paciente.html', {'paciente': paciente})
+        tarefas = Tarefa.objects.all()
+        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas})
     
 def atualizar_paciente(request, id):
     pagamento_em_dia = request.POST.get('pagamento_em_dia')
