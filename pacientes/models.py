@@ -21,7 +21,7 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nome
     
-class Tarefas(models.Model):
+class Tarefa(models.Model):
     frequencia_choices = (
         ('D', 'Diário'),
         ('1S', '1 vez por semana'),
