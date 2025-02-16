@@ -127,3 +127,13 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'bg-gray-500 text-gray-700',
+    constants.INFO: 'bg-blue-500 text-blue-700',
+    constants.SUCCESS: 'bg-green-500 text-green-700',
+    constants.WARNING: 'bg-yellow-500 text-yellow-700',
+    constants.ERROR: 'bg-red-500 text-red-700',
+}
