@@ -32,8 +32,8 @@ def paciente_view(request, id):
         tarefas = Tarefa.objects.all()
         consultas = Consulta.objects.filter(paciente=paciente)
         vizualizacoes = Visualizacoes.objects.filter(consulta__paciente=paciente)
-
-        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas, 'consultas': consultas, 'vizualizacoes': vizualizacoes})
+        tuple_grafico = ([str(i.data) for i in consultas], [str(i.humor) for i in consultas])
+        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas, 'consultas': consultas, 'vizualizacoes': vizualizacoes, 'tuple_grafico': tuple_grafico})
     elif request.method == 'POST':
         humor = request.POST.get('humor')
         registro_geral = request.POST.get('registro_geral')
