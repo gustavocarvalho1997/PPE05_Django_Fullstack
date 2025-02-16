@@ -23,6 +23,20 @@
           <div class="max-w-xl">
            
             <h2 class="text-pretty text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Cadastre pacientes</h2>
+
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="rounded-md {{ message.tags }}">
+                        <div class="flex">
+                            <div class="ml-3 py-4">
+                                {{ message }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+                
             
             <form action="{% url 'pacientes' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                 <label for="nome" class="block mt-2 text-sm/6 font-medium text-gray-600">Nome</label>
