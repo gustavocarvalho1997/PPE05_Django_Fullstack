@@ -31,4 +31,10 @@ def paciente_view(request, id):
         return render(request, 'paciente.html', {'paciente': paciente})
     
 def atualizar_paciente(request, id):
-    pass
+    pagamento_em_dia = request.POST.get('pagamento_em_dia')
+    paciente = Paciente.objects.get(id=id)
+    status = True if pagamento_em_dia == 'ativo' else False
+    paciente.pagamento_em_dia = status
+    paciente.save()
+    
+    return redirect(f'/pacientes/{id}/')
