@@ -43,7 +43,17 @@
             <div class="grid grid-cols-3 gap-4">
                 <div>
                     <h2 class="text-pretty text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Registrar consulta</h2>
-
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="rounded-md {{ message.tags }}">
+                                <div class="flex">
+                                    <div class="ml-3 py-4">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <form action="{% url 'paciente_view' paciente.id %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
                         <label for="nome" class="block mt-2 text-sm/6 font-medium text-gray-600">Humor paciente</label>
                         <div class="mt-2">
