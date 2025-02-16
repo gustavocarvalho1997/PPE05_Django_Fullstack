@@ -6,8 +6,9 @@ from pacientes.models import Paciente
 # Create your views here.
 def pacientes(request):
     if request.method == 'GET':
+        pacientes = Paciente.objects.all()
         queixas = Paciente.queixa_choices
-        return render(request, 'pacientes.html', {'queixas': queixas})
+        return render(request, 'pacientes.html', {'queixas': queixas, 'pacientes': pacientes})
     elif request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')
