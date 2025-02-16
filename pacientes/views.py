@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.messages import constants
-from pacientes.models import Paciente, Tarefa
+from pacientes.models import Paciente, Tarefa, Consulta
 
 # Create your views here.
 def pacientes(request):
@@ -30,6 +30,26 @@ def paciente_view(request, id):
     if request.method == 'GET':
         tarefas = Tarefa.objects.all()
         return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas})
+    elif request.method == 'POST':
+        humor = request.POST.get('humor')
+        registro_geral = request.POST.get('registro_geral')
+        video = request.FILES.get('video')
+        tarefas = request.POST.getlist('tarefas')
+
+        consulta = Consulta(
+            humor=int(humor),
+            registro_geral=registro_geral,
+            video=video,
+            paciente=paciente
+        )
+        consulta.save()
+
+        for tarefa in tarefas:
+            consulta.tarefas.add(tarefa)
+
+        consulta.save()
+        messages.add_message(request, constants.SUCCESS, 'Registro de consulta cadastrada com sucesso.')
+        return redirect(f'/pacientes/{id}/')
     
 def atualizar_paciente(request, id):
     pagamento_em_dia = request.POST.get('pagamento_em_dia')
