@@ -29,3 +29,6 @@ def paciente_view(request, id):
     paciente = Paciente.objects.get(id=id)
     if request.method == 'GET':
         return render(request, 'paciente.html', {'paciente': paciente})
+    
+def atualizar_paciente(request, id):
+    pass
