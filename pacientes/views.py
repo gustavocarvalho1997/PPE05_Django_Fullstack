@@ -31,7 +31,9 @@ def paciente_view(request, id):
     if request.method == 'GET':
         tarefas = Tarefa.objects.all()
         consultas = Consulta.objects.filter(paciente=paciente)
-        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas, 'consultas': consultas})
+        vizualizacoes = Visualizacoes.objects.filter(consulta__paciente=paciente)
+
+        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas, 'consultas': consultas, 'vizualizacoes': vizualizacoes})
     elif request.method == 'POST':
         humor = request.POST.get('humor')
         registro_geral = request.POST.get('registro_geral')
@@ -77,4 +79,5 @@ def consulta_publica(request, id):
         ip=request.META['REMOTE_ADDR']
     )
     view.save()
+
     return render(request, 'consulta_publica.html', {'consulta': consulta})

@@ -56,3 +56,10 @@ class Consulta(models.Model):
 class Visualizacoes(models.Model):
     consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE)
     ip = models.GenericIPAddressField()
+
+    @property
+    def views(self):
+        views = Visualizacoes.objects.filter(consulta=self.consulta)
+        totais = views.count()
+        unicas = views.values('ip').distinct().count()
+        return f'{totais} - {unicas}'
