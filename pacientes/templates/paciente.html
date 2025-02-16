@@ -87,7 +87,7 @@
 
                 <div class="mx-auto">
                     <ul role="list" class="divide-y divide-white/5">
-                      
+                        {% for consulta in consultas %}
                             <li class="relative flex items-center space-x-4 py-4">
                             <div class="min-w-0 flex-auto">
                                 <div class="flex items-center gap-x-3">
@@ -96,7 +96,7 @@
                                 </div>
                                 <h2 class="min-w-0 text-sm/6 font-semibold text-slate-800">
                                     <a href="#" class="flex gap-x-2">
-                                    <span class="truncate">30/02/20024</span>
+                                    <span class="truncate">{{consulta.data}}</span>
                                     
                                     </a>
                                 </h2>
@@ -113,10 +113,10 @@
                                     </svg>
                                 </a>
                             </li>
-                   
+                        {% endfor %}
                         
                         
-                      </ul>
+                    </ul>
                       
                 </div>
             </div>

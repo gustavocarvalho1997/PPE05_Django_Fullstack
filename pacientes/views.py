@@ -29,7 +29,8 @@ def paciente_view(request, id):
     paciente = Paciente.objects.get(id=id)
     if request.method == 'GET':
         tarefas = Tarefa.objects.all()
-        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas})
+        consultas = Consulta.objects.filter(paciente=paciente)
+        return render(request, 'paciente.html', {'paciente': paciente, 'tarefas': tarefas, 'consultas': consultas})
     elif request.method == 'POST':
         humor = request.POST.get('humor')
         registro_geral = request.POST.get('registro_geral')
